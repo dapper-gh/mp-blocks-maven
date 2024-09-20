@@ -87,7 +87,31 @@ public class Padded implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    throw new Exception("Not yet implemented"); // STUB
+    if (this.height() < this.block.height() || this.width() < this.block.width()) {
+      throw new Exception("Padded block overflows its padding");
+    } // if
+
+    if (i < 0 || i >= this.height()) {
+      throw new Exception("No such row: " + i);
+    } // if
+
+    int innerRowIndex = this.valign.getLocation(i, this.block.height(), this.height());
+
+    if (innerRowIndex == -1) {
+      return this.pad.repeat(this.width());
+    } // if
+
+    StringBuilder sb = new StringBuilder();
+    String innerRow = this.block.row(innerRowIndex);
+    for (int j = 0; j < this.width(); j++) {
+      int innerCol = this.halign.getLocation(j, this.block.width(), this.width());
+      if (innerCol == -1) {
+        sb.append(this.pad);
+      } else {
+        sb.append(innerRow.charAt(innerCol));
+      } // if-else
+    } // for
+    return sb.toString();
   } // row(int)
 
   /**
@@ -96,7 +120,7 @@ public class Padded implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    return this.height;
   } // height()
 
   /**
@@ -105,7 +129,7 @@ public class Padded implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    return this.width;
   } // width()
 
   /**
@@ -118,6 +142,24 @@ public class Padded implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return false;
+  } // eqv(AsciiBlock)
+
+  /**
+   * Determine if another block is structurally equivalent to this block.
+   *
+   * @param other
+   *   The block to compare to this block.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Padded other) {
+    return this.pad.equals(other.pad)
+      && this.width == other.width
+      && this.height == other.height
+      && this.halign == other.halign
+      && this.valign == other.valign
+      && this.block.eqv(other.block);
   } // eqv(AsciiBlock)
 } // class Padded

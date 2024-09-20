@@ -72,7 +72,23 @@ public class HComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    int thisHeight = this.height();
+    if (i < 0 || i >= thisHeight) {
+      throw new Exception("Row out of bounds: " + i);
+    } // if
+
+    StringBuilder sb = new StringBuilder();
+
+    for (AsciiBlock block : blocks) {
+      int innerRow = this.align.getLocation(i, block.height(), thisHeight);
+      if (innerRow == -1) {
+        sb.append(" ".repeat(block.width()));
+      } else {
+        sb.append(block.row(innerRow));
+      } // if-else
+    } // for
+    
+    return sb.toString();
   } // row(int)
 
   /**
@@ -81,7 +97,11 @@ public class HComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int max = 0;
+    for (AsciiBlock block : this.blocks) {
+      max = Math.max(block.height(), max);
+    }
+    return max;
   } // height()
 
   /**
@@ -90,7 +110,11 @@ public class HComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    int sum = 0;
+    for (AsciiBlock block : this.blocks) {
+      sum += block.width();
+    }
+    return sum;
   } // width()
 
   /**
@@ -103,6 +127,29 @@ public class HComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return false;
+  } // eqv(AsciiBlock)
+
+  /**
+   * Determine if another block is structurally equivalent to this block.
+   *
+   * @param other
+   *   The block to compare to this block.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(HComp other) {
+    if (this.blocks.length != other.blocks.length || this.align != other.align) {
+      return false;
+    } // if
+
+    for (int i = 0; i < this.blocks.length; i++) {
+      if (!this.blocks[i].eqv(other.blocks[i])) {
+        return false;
+      } // if
+    } // for
+
+    return true;
   } // eqv(AsciiBlock)
 } // class HComp
