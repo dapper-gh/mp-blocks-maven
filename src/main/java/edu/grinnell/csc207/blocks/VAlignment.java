@@ -11,7 +11,7 @@ public enum VAlignment {
   /** Align to the bottom. */
   BOTTOM;
 
-    /**
+  /**
    * Returns the location of a row in the inner block.
    * @param row The row of the outer block.
    * @param innerHeight The height of the block that needs to be aligned.
