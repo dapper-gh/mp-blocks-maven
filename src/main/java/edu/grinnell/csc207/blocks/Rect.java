@@ -4,6 +4,8 @@ package edu.grinnell.csc207.blocks;
  * A mutable rectangular block of one repeated character.
  *
  * @author Samuel A. Rebelsky
+ * @author David William Stroud
+ * @author Sarah Deschamps
  */
 public class Rect implements AsciiBlock {
   // +--------+------------------------------------------------------------
@@ -108,7 +110,21 @@ public class Rect implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    if (!(other instanceof Rect)) {
+      return false;
+    } // if
+
+    Rect otherRect = (Rect) other;
+
+    if (otherRect.width() != this.width()) {
+      return false;
+    } // if
+
+    if (otherRect.height() != this.height()) {
+      return false;
+    } // if
+
+    return otherRect.row.equals(this.row);
   } // eqv(AsciiBlock)
 
   // +---------------+-----------------------------------------------

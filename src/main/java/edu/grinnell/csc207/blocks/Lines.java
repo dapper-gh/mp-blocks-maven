@@ -7,6 +7,8 @@ import java.util.Arrays;
  * testing.
  *
  * @author Samuel A. Rebelsky
+ * @author David William Stroud
+ * @author Sarah Deschamps
  */
 public class Lines implements AsciiBlock {
   // +--------+------------------------------------------------------------
@@ -111,6 +113,23 @@ public class Lines implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return false;
   } // eqv(AsciiBlock)
+
+  /**
+   * Determine if another block is structurally equivalent to this block.
+   *
+   * @param other
+   *   The block to compare to this block.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Lines other) {
+    if (this.width != other.width || this.lines.length != other.lines.length) {
+      return false;
+    } // if
+
+    return Arrays.equals(this.lines, other.lines);
+  } // eqv(Lines)
 } // class Lines

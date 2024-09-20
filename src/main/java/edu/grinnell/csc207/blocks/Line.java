@@ -4,6 +4,8 @@ package edu.grinnell.csc207.blocks;
  * One line of text. The line is mutable (that is, it can be changed).
  *
  * @author Samuel A. Rebelsky
+ * @author David William Stroud
+ * @author Sarah Deschamps
  */
 public class Line implements AsciiBlock {
   // +--------+------------------------------------------------------------
@@ -78,7 +80,13 @@ public class Line implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    if (!(other instanceof Line)) {
+      return false;
+    }
+
+    Line otherLine = (Line) other;
+
+    return otherLine.line.equals(this.line);
   } // eqv(AsciiBlock)
 
   // +---------------+-----------------------------------------------
