@@ -63,7 +63,7 @@ public class Grid implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    if (i >= this.height() || i <= 0) {
+    if (i >= this.height() || i < 0) {
       throw new Exception("No such row: " + i);
     } // if
 

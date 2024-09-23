@@ -127,7 +127,7 @@ public class HComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;
+    return other instanceof HComp && this.eqv((HComp) other);
   } // eqv(AsciiBlock)
 
   /**

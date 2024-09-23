@@ -142,7 +142,7 @@ public class Padded implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;
+    return other instanceof Padded && this.eqv((Padded) other);
   } // eqv(AsciiBlock)
 
   /**

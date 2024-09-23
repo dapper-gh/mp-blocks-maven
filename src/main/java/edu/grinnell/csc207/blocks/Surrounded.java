@@ -90,7 +90,7 @@ public class Surrounded implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;
+    return other instanceof Surrounded && this.eqv((Surrounded) other);
   } // eqv(AsciiBlock)
 
   /**
