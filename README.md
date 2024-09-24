@@ -10,7 +10,11 @@ Explorations with the creation, composition, and mutation of blocks of ASCII tex
 
 **Notes for the reader**
 
-TODO: STUB
+This project implements a number of types that operate on rectangular blocks of text.
+These include `VComp` and `HComp`, which compose one or more blocks of text vertically
+and horizontally, respectively. Other blocks can be found in the
+`src/main/java/edu/grinnell/csc207/blocks` directory. We have also made "art" using
+these blocks, which can be found at `src/main/java/edu/grinnell/csc207/main/Art80x24.java`.
 
 ---
 
