@@ -4,6 +4,9 @@ package edu.grinnell.csc207.blocks;
  * An AsciiBlock that transposes (flips the axes of) another AsciiBlock.
  */
 public class Transpose implements AsciiBlock {
+  /*
+   * The block needing to be transposed.
+   */
   AsciiBlock block;
 
   /**

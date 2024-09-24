@@ -151,5 +151,5 @@ public class HComp implements AsciiBlock {
     } // for
 
     return true;
-  } // eqv(AsciiBlock)
+  } // eqv(HComp)
 } // class HComp

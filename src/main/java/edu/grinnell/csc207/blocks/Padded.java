@@ -161,5 +161,5 @@ public class Padded implements AsciiBlock {
       && this.halign == other.halign
       && this.valign == other.valign
       && this.block.eqv(other.block);
-  } // eqv(AsciiBlock)
+  } // eqv(Padded)
 } // class Padded
