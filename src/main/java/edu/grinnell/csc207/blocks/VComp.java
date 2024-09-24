@@ -76,12 +76,19 @@ public class VComp implements AsciiBlock {
       throw new Exception("Invalid row " + i);
     }
     int index = 0;
+    int rowOfCurrentBlock = 0;
     int heightSoFar = 0;
-    for (int j = 0; j < this.blocks.length; j++) {
+    findRow: for (int j = 0; j < this.blocks.length; j++) {
       heightSoFar += this.blocks[j].height();
       if (heightSoFar > i) {
-        index = j - 1;
-        break;
+        index = j;
+        int blockHeight = this.blocks[j].height();
+        for (int k = blockHeight; k >= 0; k--) {
+          if (heightSoFar - blockHeight + k == i) {
+            rowOfCurrentBlock = k;
+            break findRow;
+          }
+        }
       }
     }
     StringBuilder sb = new StringBuilder();
@@ -91,8 +98,8 @@ public class VComp implements AsciiBlock {
         sb.append(" ");
       } else {
         // add the row all at once for better efficiency
-        sb.append(this.blocks[j].row(place));
-        j += this.blocks[j].width() - 1;
+        sb.append(this.blocks[index].row(rowOfCurrentBlock));
+        j += this.blocks[index].width() - 1;
       }
     }
     return sb.toString();
@@ -117,11 +124,13 @@ public class VComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    int outerWidth = this.blocks[0].width();;
+    if (this.blocks.length == 0) {
+      return 0;
+    }
+    int outerWidth = this.blocks[0].width();
     for (int j = 0; j < this.blocks.length; j++) {
-      if (outerWidth <= this.blocks[j].width()) {
+      if (outerWidth < this.blocks[j].width()) {
         outerWidth = this.blocks[j].width();
-        return outerWidth;
       }
     }
     return outerWidth;
