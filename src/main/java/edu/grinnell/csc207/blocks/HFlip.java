@@ -50,7 +50,7 @@ public class HFlip implements AsciiBlock {
       throw new Exception("Invalid row: " + i);
     }
     StringBuilder sb = new StringBuilder();
-    for (int j = this.block.width() - 1; j <= 0; j--) {
+    for (int j = this.block.width() - 1; j >= 0; j--) {
       sb.append(this.block.row(i).charAt(j));
     }
     return sb.toString();
