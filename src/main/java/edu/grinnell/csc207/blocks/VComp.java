@@ -72,7 +72,30 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    if (i < 0 || i >= this.height()) {
+      throw new Exception("Invalid row " + i);
+    }
+    int index = 0;
+    int heightSoFar = 0;
+    for (int j = 0; j < this.blocks.length; j++) {
+      heightSoFar += this.blocks[j].height();
+      if (heightSoFar > i) {
+        index = j - 1;
+        break;
+      }
+    }
+    StringBuilder sb = new StringBuilder();
+    for (int j = 0; j < this.width(); j++) {
+      int place = align.getLocation(j, this.blocks[index].width(), this.width());
+      if (place < 0) {
+        sb.append(" ");
+      } else {
+        // add the row all at once for better efficiency
+        sb.append(this.blocks[j].row(place));
+        j += this.blocks[j].width() - 1;
+      }
+    }
+    return sb.toString();
   } // row(int)
 
   /**
@@ -81,7 +104,11 @@ public class VComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int totalHeight = 0;
+    for (int j = 0; j < this.blocks.length; j++) {
+      totalHeight += this.blocks[j].height();
+    }
+    return totalHeight;
   } // height()
 
   /**
@@ -90,7 +117,14 @@ public class VComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    int outerWidth = this.blocks[0].width();;
+    for (int j = 0; j < this.blocks.length; j++) {
+      if (outerWidth <= this.blocks[j].width()) {
+        outerWidth = this.blocks[j].width();
+        return outerWidth;
+      }
+    }
+    return outerWidth;
   } // width()
 
   /**
@@ -103,6 +137,28 @@ public class VComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return other instanceof VComp && this.eqv((VComp) other);
   } // eqv(AsciiBlock)
+
+  /**
+   * Determine if another block is structurally equivalent to this block.
+   *
+   * @param other
+   *   The block to compare to this block.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(VComp other) {
+    if (this.blocks.length != other.blocks.length || this.align != other.align) {
+      return false;
+    } // if 
+
+    for (int j = 0; j < this.blocks.length; j++) {
+      if (!this.blocks[j].equals(other.blocks[j])) {
+        return false;
+      }
+    }
+    return true;
+  } // eqv(VComp)
 } // class VComp
