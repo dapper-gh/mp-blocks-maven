@@ -97,4 +97,73 @@ public class TestTranspose {
       "empty is transposed correctly"
     );
   }
+
+  /**
+   * This test checks whether a VComp block can be transposed correctly.
+   */
+  @Test
+  public void transposeVcomp() {
+    VComp vComp = new VComp(HAlignment.CENTER, new AsciiBlock[] {
+      new Line("Hello"),
+      new Line("Hello, world!")
+    });
+
+    //     Hello    
+    // Hello, world!
+
+    assertEquals(
+      " H\n e\n l\n l\nHo\ne,\nl \nlw\noo\n r\n l\n d\n !\n",
+      TestUtils.toString(new Transpose(vComp)),
+      "vComp is transposed correctly"
+    );
+  } // transposeVcomp
+  
+  /**
+   * This test checks whether squares of various sizes can be transposed correctly.
+   */
+  @Test
+  public void transposeSquares() {
+    Lines squareSizeZero = new Lines(new String[] {""});
+    Lines squareSizeOne = new Lines(new String[] {"a"});
+    Lines squareSizeTwo = new Lines(new String[] {"ab", "cd"});
+    Lines squareSizeThree = new Lines(new String[] {"abc", "def", "ghi"});
+
+    assertEquals(
+      "",
+      TestUtils.toString(new Transpose(squareSizeZero)),
+      "squareSizeZero is transposed correctly"
+    );
+
+    assertEquals(
+      "a\n",
+      TestUtils.toString(new Transpose(squareSizeOne)),
+      "squareSizeOne is transposed correctly"
+    );
+
+    assertEquals(
+      "ac\nbd\n",
+      TestUtils.toString(new Transpose(squareSizeTwo)),
+      "squareSizeTwo is transposed correctly"
+    );
+
+    assertEquals(
+      "adg\nbeh\ncfi\n",
+      TestUtils.toString(new Transpose(squareSizeThree)),
+      "squareSizeThree is transposed correctly"
+    );
+  } // transposeSquares
+
+  /**
+   * This test checks whether transposing is its own inverse.
+   */
+  @Test
+  public void transposeInverse() {
+    Lines block = new Lines(new String[] {"abcd", "efgh", "ijkl"});
+
+    assertEquals(
+      TestUtils.toString(block),
+      TestUtils.toString(new Transpose(new Transpose(block))),
+      "the transpose of a transpose is the original block"
+    );
+  } // transposeInverse
 } // class TestNewBlock
