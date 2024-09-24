@@ -87,7 +87,7 @@ public class HComp implements AsciiBlock {
         sb.append(block.row(innerRow));
       } // if-else
     } // for
-    
+
     return sb.toString();
   } // row(int)
 
@@ -100,7 +100,7 @@ public class HComp implements AsciiBlock {
     int max = 0;
     for (AsciiBlock block : this.blocks) {
       max = Math.max(block.height(), max);
-    }
+    } // for
     return max;
   } // height()
 
@@ -113,7 +113,7 @@ public class HComp implements AsciiBlock {
     int sum = 0;
     for (AsciiBlock block : this.blocks) {
       sum += block.width();
-    }
+    } // for
     return sum;
   } // width()
 

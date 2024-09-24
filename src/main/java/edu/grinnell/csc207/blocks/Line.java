@@ -82,7 +82,7 @@ public class Line implements AsciiBlock {
   public boolean eqv(AsciiBlock other) {
     if (!(other instanceof Line)) {
       return false;
-    }
+    } // if
 
     Line otherLine = (Line) other;
 

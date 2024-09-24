@@ -16,7 +16,8 @@ public enum HAlignment {
    * @param col The column of the outer block.
    * @param innerWidth The width of the block that needs to be aligned.
    * @param outerWidth The width of the block that is aligning.
-   * @return The equivalent column of the inner block, or -1 if the column is not in the inner block.
+   * @return The equivalent column of the inner block,
+   *         or -1 if the column is not in the inner block.
    */
   public int getLocation(int col, int innerWidth, int outerWidth) {
     int diff = outerWidth - innerWidth;

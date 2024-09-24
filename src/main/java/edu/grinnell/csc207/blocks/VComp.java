@@ -74,7 +74,7 @@ public class VComp implements AsciiBlock {
   public String row(int i) throws Exception {
     if (i < 0 || i >= this.height()) {
       throw new Exception("Invalid row " + i);
-    }
+    } // if
     int index = 0;
     int rowOfCurrentBlock = 0;
     int heightSoFar = 0;
@@ -87,10 +87,10 @@ public class VComp implements AsciiBlock {
           if (heightSoFar - blockHeight + k == i) {
             rowOfCurrentBlock = k;
             break findRow;
-          }
-        }
-      }
-    }
+          } // if
+        } // for
+      } // if
+    } // for
     StringBuilder sb = new StringBuilder();
     for (int j = 0; j < this.width(); j++) {
       int place = align.getLocation(j, this.blocks[index].width(), this.width());
@@ -100,8 +100,8 @@ public class VComp implements AsciiBlock {
         // add the row all at once for better efficiency
         sb.append(this.blocks[index].row(rowOfCurrentBlock));
         j += this.blocks[index].width() - 1;
-      }
-    }
+      } // if-else
+    } // for
     return sb.toString();
   } // row(int)
 
@@ -114,7 +114,7 @@ public class VComp implements AsciiBlock {
     int totalHeight = 0;
     for (int j = 0; j < this.blocks.length; j++) {
       totalHeight += this.blocks[j].height();
-    }
+    } // for
     return totalHeight;
   } // height()
 
@@ -126,13 +126,13 @@ public class VComp implements AsciiBlock {
   public int width() {
     if (this.blocks.length == 0) {
       return 0;
-    }
+    } // if
     int outerWidth = this.blocks[0].width();
     for (int j = 0; j < this.blocks.length; j++) {
       if (outerWidth < this.blocks[j].width()) {
         outerWidth = this.blocks[j].width();
-      }
-    }
+      } // if
+    } // for
     return outerWidth;
   } // width()
 
@@ -161,13 +161,13 @@ public class VComp implements AsciiBlock {
   public boolean eqv(VComp other) {
     if (this.blocks.length != other.blocks.length || this.align != other.align) {
       return false;
-    } // if 
+    } // if
 
     for (int j = 0; j < this.blocks.length; j++) {
       if (!this.blocks[j].equals(other.blocks[j])) {
         return false;
-      }
-    }
+      } // if
+    } // for
     return true;
   } // eqv(VComp)
 } // class VComp

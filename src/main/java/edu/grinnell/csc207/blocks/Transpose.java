@@ -4,19 +4,19 @@ package edu.grinnell.csc207.blocks;
  * An AsciiBlock that transposes (flips the axes of) another AsciiBlock.
  */
 public class Transpose implements AsciiBlock {
-  /*
+  /**
    * The block needing to be transposed.
    */
   AsciiBlock block;
 
   /**
    * This constructor creates a Transpose block that represents the transposed version of block1.
-   * 
+   *
    * @param block1 The block to transpose.
    */
   public Transpose(AsciiBlock block1) {
     this.block = block1;
-  }
+  } // Transpose(AsciiBlock)
 
   /**
    * Get one row from the block.
@@ -86,4 +86,4 @@ public class Transpose implements AsciiBlock {
   public boolean eqv(Transpose other) {
     return this.block.eqv(other.block);
   } // eqv(Transpose)
-}
+} // class Transpose

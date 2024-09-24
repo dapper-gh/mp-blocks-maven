@@ -48,11 +48,11 @@ public class HFlip implements AsciiBlock {
   public String row(int i) throws Exception {
     if (i < 0 || i >= this.height()) {
       throw new Exception("Invalid row: " + i);
-    }
+    } // if
     StringBuilder sb = new StringBuilder();
     for (int j = this.block.width() - 1; j >= 0; j--) {
       sb.append(this.block.row(i).charAt(j));
-    }
+    } // for
     return sb.toString();
   } // row(int)
 
@@ -98,5 +98,5 @@ public class HFlip implements AsciiBlock {
    */
   public boolean eqv(HFlip other) {
     return this.block.eqv(other.block);
-  } // eqv(AsciiBlock)
+  } // eqv(HFlip)
 } // class HFlip
