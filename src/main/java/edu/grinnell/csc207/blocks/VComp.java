@@ -164,7 +164,7 @@ public class VComp implements AsciiBlock {
     } // if
 
     for (int j = 0; j < this.blocks.length; j++) {
-      if (!this.blocks[j].equals(other.blocks[j])) {
+      if (!this.blocks[j].eqv(other.blocks[j])) {
         return false;
       } // if
     } // for
